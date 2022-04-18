@@ -1,26 +1,28 @@
-terraform {
+/*terraform {
   backend "s3" {
     bucket = "james-terraform-example-state"
     key =  "global/s3/terraform.tfstate"
     region = "us-east-2"
     profile = "james"
 
-    dynamodb_table = "james-terraform-example-locks"
+    //dynamodb_table = "james-terraform-example-locks"
     encrypt = true
   }
-}
+}*/
 
 provider "aws" {
   region = "us-east-2"
   profile = "james"
 }
 
-resource "aws_s3_bucket" "terraform_state" {
+/*resource "aws_s3_bucket" "terraform_state" {
   bucket = "james-terraform-example-state"
 
-  lifecycle {
+  *//*lifecycle {
     prevent_destroy = true
-  }
+  }*//*
+
+  force_destroy = true
 
   versioning {
     enabled = true
@@ -44,7 +46,7 @@ resource "aws_dynamodb_table" "terraform_locks" {
     name = "LockID"
     type = "S"
   }
-}
+}*/
 
 resource "aws_launch_configuration" "example" {
   image_id = "ami-0c55b159cbfafe1f0"
